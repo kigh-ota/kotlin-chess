@@ -1,14 +1,11 @@
 package core.move
 
-import core.Bishop
-import core.GameBoard
-import core.Piece
-import core.Position
+import core.*
 import java.lang.Math.abs
 
-class KnightMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSingleMove(piece, dest, board) {
+class KnightMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
     init {
-        require(piece is Bishop)
+        require(piece is Knight)
     }
 
     override fun isLegal(): Boolean {

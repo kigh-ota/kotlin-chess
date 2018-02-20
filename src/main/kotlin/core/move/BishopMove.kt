@@ -2,7 +2,7 @@ package core.move
 
 import core.*
 
-class BishopMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSingleMove(piece, dest, board) {
+class BishopMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
     init {
         require(piece is Bishop)
     }

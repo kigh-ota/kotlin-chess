@@ -1,14 +1,25 @@
 package core.move
 
-import core.*
+import core.GameBoard
+import core.Pawn
+import core.Piece
+import core.Player
 
-class PawnDoubleMove(piece: Piece, dest: Position, board: GameBoard) : SinglePieceMove(piece, dest, board) {
+class PawnDoubleMove(piecePosNotion: String, destNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, destNotion, board) {
     init {
         require(piece is Pawn)
     }
 
     override fun isLegal(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (piece.moveCount != 0) {
+            return false
+        }
+        if (dest.file != piece.pos.file)
+            return false
+        return when (piece.player) {
+            Player.WHITE -> dest.rank == piece.pos.rank + 2
+            Player.BLACK -> dest.rank == piece.pos.rank - 2
+        }
     }
 
     override fun capturedPiece(): Piece? {

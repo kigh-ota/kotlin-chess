@@ -8,7 +8,9 @@ interface GameBoard {
     val record: List<Move>
     fun setup()
     fun move(move: Move)
+    fun put(piece: Piece)
     fun pieceAt(pos: Position): Piece?
+    fun pieceAt(notion: String): Piece?
 
     companion object {
         const val SIZE = 8

@@ -2,7 +2,7 @@ package core.move
 
 import core.*
 
-class KingMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSingleMove(piece, dest, board) {
+class KingMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
     init {
         require(piece is King)
     }

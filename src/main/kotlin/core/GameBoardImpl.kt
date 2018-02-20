@@ -51,11 +51,20 @@ class GameBoardImpl : GameBoard {
     }
 
     override fun move(move: Move) {
-        record.plus(move)
+        _record.add(move)
         move.move()
     }
 
     override fun pieceAt(pos: Position): Piece? {
         return _pieces.firstOrNull { it.pos == pos }
+    }
+
+    override fun pieceAt(notion: String): Piece? {
+        return pieceAt(Position.of(notion))
+    }
+
+    override fun put(piece: Piece) {
+        require(_pieces.all {it.pos != piece.pos })
+        _pieces.add(piece)
     }
 }

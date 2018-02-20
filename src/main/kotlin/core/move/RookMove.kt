@@ -1,8 +1,10 @@
 package core.move
 
-import core.*
+import core.GameBoard
+import core.Piece
+import core.Rook
 
-class RookMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSingleMove(piece, dest, board) {
+class RookMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
     init {
         require(piece is Rook)
     }

@@ -4,7 +4,10 @@ import core.GameBoard
 import core.Piece
 import core.Position
 
-abstract class SinglePieceMove(val piece: Piece, val dest: Position, val board: GameBoard) : Move {
+abstract class SinglePieceMove(piecePosNotion: String, destNotion: String, val board: GameBoard) : Move {
+    protected val piece: Piece = board.pieceAt(piecePosNotion)!!
+    protected val dest: Position = Position.of(destNotion)
+
     init {
         require(!isBlockedBySelfPiece())
     }

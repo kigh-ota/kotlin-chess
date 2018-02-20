@@ -2,7 +2,7 @@ package core.move
 
 import core.*
 
-class PawnCapturingMove(piece: Piece, dest: Position, board: GameBoard) : SinglePieceMove(piece, dest, board) {
+class PawnCapturingMove(piecePosNotion: String, destNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, destNotion, board) {
     init {
         require(piece is Pawn)
     }
