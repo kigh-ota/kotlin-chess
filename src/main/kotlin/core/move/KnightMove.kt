@@ -12,8 +12,6 @@ class KnightMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSin
     }
 
     override fun isLegal(): Boolean {
-        if (isBlockedBySelfPiece())
-            return false
         return (abs(dest.rank - piece.pos.rank) + abs(dest.file - piece.pos.file) == 3) and
                 (dest.rank != piece.pos.rank) and (dest.file != piece.pos.file)
     }

@@ -2,7 +2,7 @@ package core.move
 
 import core.*
 
-class EnPassant(piece: Piece, dest: Position, board: GameBoard) : SingleMove(piece, dest, board) {
+class EnPassant(piece: Piece, dest: Position, board: GameBoard) : SinglePieceMove(piece, dest, board) {
     init {
         require(piece is Pawn)
     }

@@ -2,14 +2,12 @@ package core.move
 
 import core.*
 
-class PawnRegularMove(piece: Piece, dest: Position, board: GameBoard) : SingleMove(piece, dest, board) {
+class PawnSingleMove(piece: Piece, dest: Position, board: GameBoard) : SinglePieceMove(piece, dest, board) {
     init {
         require(piece is Pawn)
     }
 
     override fun isLegal(): Boolean {
-        if (isBlockedBySelfPiece())
-            return false
         if (dest.file != piece.pos.file)
             return false
         return when (piece.player) {

@@ -8,8 +8,6 @@ class BishopMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSin
     }
 
     override fun isLegal(): Boolean {
-        if (isBlockedBySelfPiece())
-            return false
         // FIXME 最初に塞いでる敵駒までしか進めない
         return (piece.pos.rank + piece.pos.file == dest.rank + dest.file) or
                 (piece.pos.rank - piece.pos.file == dest.rank - dest.file)

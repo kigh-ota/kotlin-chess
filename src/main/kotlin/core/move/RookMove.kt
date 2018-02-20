@@ -8,8 +8,6 @@ class RookMove(piece: Piece, dest: Position, board: GameBoard) : CapturableSingl
     }
 
     override fun isLegal(): Boolean {
-        if (isBlockedBySelfPiece())
-            return false
         // FIXME 最初に塞いでる敵駒までしか進めない
         return (piece.pos.rank == dest.rank) or (piece.pos.file == dest.file)
     }
