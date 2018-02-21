@@ -1,13 +1,13 @@
 package core
 
-import org.junit.Assert.*
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class PositionTest {
     @Test
     fun testOf() {
         val pos = Position.of("g4")
-        assert(pos.rank == 4)
-        assert(pos.file == 7)
+        assertEquals(4, pos.rank)
+        assertEquals(7, pos.file)
     }
 }

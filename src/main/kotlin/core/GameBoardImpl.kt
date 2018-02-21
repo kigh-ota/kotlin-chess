@@ -7,8 +7,6 @@ class GameBoardImpl : GameBoard {
     override val pieces: Set<Piece>
         get() = _pieces
 
-    override val size: Int = 8
-
     private var _record: MutableList<Move> = mutableListOf()
     override val record: List<Move>
         get() = _record
@@ -33,6 +31,8 @@ class GameBoardImpl : GameBoard {
         }
     }
 
+    val capturedPieces: MutableSet<Piece> = mutableSetOf()
+
     override fun setup() {
         set(
             arrayOf(
@@ -49,8 +49,13 @@ class GameBoardImpl : GameBoard {
     }
 
     override fun move(move: Move) {
-        _record.add(move)
+        val captured = move.capturedPiece()
+        if (captured != null) {
+            capturedPieces.add(captured)
+            _pieces.remove(captured)
+        }
         move.move()
+        _record.add(move)
     }
 
     override fun pieceAt(pos: Position?): Piece? {

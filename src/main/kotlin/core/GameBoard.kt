@@ -3,7 +3,6 @@ package core
 import core.move.Move
 
 interface GameBoard {
-    val size: Int
     val pieces: Set<Piece>
     val record: List<Move>
     fun setup()
