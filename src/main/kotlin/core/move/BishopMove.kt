@@ -1,15 +1,21 @@
 package core.move
 
-import core.*
+import core.Bishop
+import core.GameBoard
+import core.Position
 
-class BishopMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
+class BishopMove(piecePosNotion: String, board: GameBoard) :
+    CapturableSingleMove(piecePosNotion, board) {
     init {
         require(piece is Bishop)
     }
 
-    override fun isLegal(): Boolean {
-        // FIXME 最初に塞いでる敵駒までしか進めない
-        return (piece.pos.rank + piece.pos.file == dest.rank + dest.file) or
-                (piece.pos.rank - piece.pos.file == dest.rank - dest.file)
+    override fun possibleDestinations(): Set<Position> {
+        val ret = mutableSetOf<Position>()
+        ret.addAll(destinationsOnLine(piece.pos::toUpperLeft))
+        ret.addAll(destinationsOnLine(piece.pos::toUpperRight))
+        ret.addAll(destinationsOnLine(piece.pos::toLowerLeft))
+        ret.addAll(destinationsOnLine(piece.pos::toLowerRight))
+        return ret
     }
 }

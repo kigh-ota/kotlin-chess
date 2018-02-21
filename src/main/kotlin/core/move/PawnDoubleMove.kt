@@ -2,27 +2,24 @@ package core.move
 
 import core.GameBoard
 import core.Pawn
-import core.Piece
 import core.Player
+import core.Position
 
-class PawnDoubleMove(piecePosNotion: String, destNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, destNotion, board) {
+class PawnDoubleMove(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
     init {
         require(piece is Pawn)
     }
 
-    override fun isLegal(): Boolean {
-        if (piece.moveCount != 0) {
-            return false
+    override fun possibleDestinations(): Set<Position> {
+        if (piece.moveCount != 0) return emptySet()
+        val pos1 = when (piece.player) {
+            Player.WHITE -> piece.pos.toUpper(1)
+            Player.BLACK -> piece.pos.toLower(1)
         }
-        if (dest.file != piece.pos.file)
-            return false
-        return when (piece.player) {
-            Player.WHITE -> dest.rank == piece.pos.rank + 2
-            Player.BLACK -> dest.rank == piece.pos.rank - 2
+        val pos2 = when (piece.player) {
+            Player.WHITE -> piece.pos.toUpper(2)
+            Player.BLACK -> piece.pos.toLower(2)
         }
-    }
-
-    override fun capturedPiece(): Piece? {
-        return null
+        return if (pos2 != null && board.pieceAt(pos1) == null && board.pieceAt(pos2) == null) setOf(pos2) else emptySet()
     }
 }

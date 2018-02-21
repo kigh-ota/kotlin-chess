@@ -10,7 +10,7 @@ class PawnSingleMoveTest {
     fun testLegalMove() {
         val pawn = Pawn(Position.of("a2"), Player.WHITE)
         board.put(pawn)
-        PawnSingleMove("a2", "a3", board).move()
+        PawnSingleMove("a2", board).to("a3").move()
         assert(pawn.pos == Position.of("a3"))
     }
 
@@ -18,12 +18,12 @@ class PawnSingleMoveTest {
     fun testIllegalMove() {
         val pawn = Pawn(Position.of("a2"), Player.WHITE)
         board.put(pawn)
-        PawnSingleMove("a2", "a4", board).move()
+        PawnSingleMove("a2", board).to("a4").move()
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun testIllegalPiece() {
         board.put(Bishop(Position.of("c1"), Player.WHITE))
-        PawnSingleMove("c1", "c2", board)
+        PawnSingleMove("c1", board).to("c2")
     }
 }

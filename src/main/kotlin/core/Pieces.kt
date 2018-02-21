@@ -5,7 +5,14 @@ abstract class Piece(var pos: Position, val player: Player) {
     val moveCount: Int
         get() = _moveCount
 
-    fun moveTo(dest: Position) {
+    val rank: Int
+        get() = pos.rank
+
+    val file: Int
+        get() = pos.file
+
+    fun moveTo(dest: Position?) {
+        if (dest == null) throw RuntimeException("Illegal Destination")
         pos = dest
         _moveCount++
     }

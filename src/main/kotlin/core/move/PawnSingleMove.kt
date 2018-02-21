@@ -2,21 +2,22 @@ package core.move
 
 import core.*
 
-class PawnSingleMove(piecePosNotion: String, destNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, destNotion, board) {
+class PawnSingleMove(piecePosNotion: String, board: GameBoard) :
+    SinglePieceMove(piecePosNotion, board) {
+
     init {
         require(piece is Pawn)
     }
 
-    override fun isLegal(): Boolean {
-        if (dest.file != piece.pos.file)
-            return false
-        return when (piece.player) {
-            Player.WHITE -> dest.rank == piece.pos.rank + 1
-            Player.BLACK -> dest.rank == piece.pos.rank - 1
-        }
-    }
-
     override fun capturedPiece(): Piece? {
         return null;
+    }
+
+    override fun possibleDestinations(): Set<Position> {
+        val pos = when (piece.player) {
+            Player.WHITE -> piece.pos.toUpper(1)
+            Player.BLACK -> piece.pos.toLower(1)
+        }
+        return if (pos != null && board.pieceAt(pos) == null) setOf(pos) else emptySet()
     }
 }

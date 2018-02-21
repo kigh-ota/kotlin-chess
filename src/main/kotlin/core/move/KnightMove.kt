@@ -1,15 +1,29 @@
 package core.move
 
-import core.*
-import java.lang.Math.abs
+import core.GameBoard
+import core.Knight
+import core.Position
 
-class KnightMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
+class KnightMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, board) {
     init {
         require(piece is Knight)
     }
 
-    override fun isLegal(): Boolean {
-        return (abs(dest.rank - piece.pos.rank) + abs(dest.file - piece.pos.file) == 3) and
-                (dest.rank != piece.pos.rank) and (dest.file != piece.pos.file)
+    override fun possibleDestinations(): Set<Position> {
+        val ret = mutableSetOf<Position>()
+        arrayOf(
+            piece.pos.to(-2, -1),
+            piece.pos.to(-2, 1),
+            piece.pos.to(2, -1),
+            piece.pos.to(2, 1),
+            piece.pos.to(-1, -2),
+            piece.pos.to(-1, 2),
+            piece.pos.to(1, -2),
+            piece.pos.to(1, 2)
+        ).forEach {
+            if (it != null && !isOccupiedBySelfPiece(it)) ret.add(it)
+        }
+        return ret
     }
+
 }

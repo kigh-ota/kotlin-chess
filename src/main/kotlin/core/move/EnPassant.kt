@@ -1,8 +1,15 @@
 package core.move
 
-import core.*
+import core.GameBoard
+import core.Pawn
+import core.Piece
+import core.Position
 
-class EnPassant(piecePosNotion: String, destNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, destNotion, board) {
+class EnPassant(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
+    override fun possibleDestinations(): Set<Position> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     init {
         require(piece is Pawn)
     }

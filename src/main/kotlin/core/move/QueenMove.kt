@@ -1,20 +1,24 @@
 package core.move
 
-import core.*
+import core.GameBoard
+import core.Position
+import core.Queen
 
-class QueenMove(piecePosNotion: String, destNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, destNotion, board) {
-    override fun isLegal(): Boolean {
-        // FIXME 最初に塞いでる敵駒までしか進めない
-        if ((piece.pos.rank == dest.rank) or (piece.pos.file == dest.file))
-            return true
-        if ((piece.pos.rank + piece.pos.file == dest.rank + dest.file) or
-            (piece.pos.rank - piece.pos.file == dest.rank - dest.file)
-        )
-            return true
-        return false
-    }
-
+class QueenMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, board) {
     init {
         require(piece is Queen)
+    }
+
+    override fun possibleDestinations(): Set<Position> {
+        val ret = mutableSetOf<Position>()
+        ret.addAll(destinationsOnLine(piece.pos::toUpper))
+        ret.addAll(destinationsOnLine(piece.pos::toLower))
+        ret.addAll(destinationsOnLine(piece.pos::toLeft))
+        ret.addAll(destinationsOnLine(piece.pos::toRight))
+        ret.addAll(destinationsOnLine(piece.pos::toUpperLeft))
+        ret.addAll(destinationsOnLine(piece.pos::toUpperRight))
+        ret.addAll(destinationsOnLine(piece.pos::toLowerLeft))
+        ret.addAll(destinationsOnLine(piece.pos::toLowerRight))
+        return ret
     }
 }

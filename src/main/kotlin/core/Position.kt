@@ -2,11 +2,18 @@ package core
 
 data class Position(val rank: Int, val file: Int) {
     init {
-        require(rank >= 1)
-        require(rank <= GameBoard.SIZE)
-        require(file >= 1)
-        require(file <= GameBoard.SIZE)
+        require(valid(rank, file))
     }
+
+    fun to(r: Int, f: Int): Position? = maybe(rank + r, file + f)
+    fun toUpper(i: Int): Position? = to(i, 0)
+    fun toLower(i: Int): Position? = to(-i, 0)
+    fun toLeft(i: Int): Position? = to(0, -i)
+    fun toRight(i: Int): Position? = to(0, i)
+    fun toUpperLeft(i: Int): Position? = to(i, -i)
+    fun toUpperRight(i: Int): Position? = to(i, i)
+    fun toLowerLeft(i: Int): Position? = to(-i, -i)
+    fun toLowerRight(i: Int): Position? = to(-i, i)
 
     companion object {
         fun of(notion: String): Position {
@@ -21,6 +28,14 @@ data class Position(val rank: Int, val file: Int) {
             require(rank >= 1 && rank <= GameBoard.SIZE)
 
             return Position(rank, file)
+        }
+
+        fun valid(rank: Int, file: Int): Boolean {
+            return rank >= 1 && rank <= GameBoard.SIZE && file >= 1 && file <= GameBoard.SIZE
+        }
+
+        fun maybe(rank: Int, file: Int): Position? {
+            return if (valid(rank, file)) Position(rank, file) else null
         }
     }
 }

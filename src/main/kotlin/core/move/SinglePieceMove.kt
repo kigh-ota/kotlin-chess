@@ -4,20 +4,27 @@ import core.GameBoard
 import core.Piece
 import core.Position
 
-abstract class SinglePieceMove(piecePosNotion: String, destNotion: String, val board: GameBoard) : Move {
+abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : Move {
     protected val piece: Piece = board.pieceAt(piecePosNotion)!!
-    protected val dest: Position = Position.of(destNotion)
+    protected var dest: Position? = null
 
-    init {
-        require(!isBlockedBySelfPiece())
+    fun to(notion: String): Move {
+        dest = Position.of(notion)
+        return this
     }
 
     override fun move() {
-        if (!isLegal()) {
-            throw RuntimeException("Illegal Move")
-        }
+        if (!isLegal()) throw RuntimeException("Illegal Move")
         piece.moveTo(dest)
     }
 
-    private fun isBlockedBySelfPiece() = board.pieceAt(dest)?.player == piece.player
+    override fun isLegal(): Boolean {
+        return possibleDestinations().contains(dest)
+    }
+
+    abstract fun possibleDestinations(): Set<Position>
+
+    override fun capturedPiece(): Piece? {
+        return null
+    }
 }
