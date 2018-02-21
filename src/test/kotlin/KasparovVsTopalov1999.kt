@@ -1,4 +1,6 @@
+
 import core.GameBoardImpl
+import core.move.BishopMove
 import core.move.KnightMove
 import core.move.PawnDoubleMove
 import core.move.PawnSingleMove
@@ -10,11 +12,17 @@ class KasparovVsTopalov1999Test {
     fun test() {
         val board = GameBoardImpl()
         board.setup()
+
         board.move(PawnDoubleMove("e2", board).to("e4"))
         board.move(PawnSingleMove("d7", board).to("d6"))
+
         board.move(PawnDoubleMove("d2", board).to("d4"))
         board.move(KnightMove("g8", board).to("f6"))
+
         board.move(KnightMove("b1", board).to("c3"))
         board.move(PawnSingleMove("g7", board).to("g6"))
+
+        board.move(BishopMove("c1", board).to("e3"))
+        board.move(BishopMove("f8", board).to("g7"))
     }
 }

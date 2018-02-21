@@ -8,7 +8,7 @@ abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : M
     protected val piece: Piece = board.pieceAt(piecePosNotion)!!
     protected var dest: Position? = null
 
-    fun to(notion: String): Move {
+    fun to(notion: String): SinglePieceMove {
         dest = Position.of(notion)
         return this
     }
