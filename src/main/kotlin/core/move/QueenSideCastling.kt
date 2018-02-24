@@ -2,9 +2,11 @@ package core.move
 
 import core.*
 
-class QueenSideCastling(val player: Player, val board: GameBoard) : Move {
+class QueenSideCastling(val board: GameBoard) : Move {
     private val rook: Piece = board.pieceAt(if (player == Player.WHITE) "a1" else "a8")!!
     private val king: Piece = board.pieces.first { it.player == player && it is King }
+    override val player: Player
+        get() = board.nextTurn
 
     override fun isLegal(): Boolean {
         when (player) {

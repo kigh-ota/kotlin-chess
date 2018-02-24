@@ -11,6 +11,10 @@ class GameBoardImpl : GameBoard {
     override val record: List<Move>
         get() = _record
 
+    private var _nextTurn: Player = Player.WHITE
+    override val nextTurn: Player
+        get() = _nextTurn
+
     override fun set(strs: Array<String>) {
         require(strs.size == 8)
         _pieces = mutableSetOf()
@@ -46,9 +50,11 @@ class GameBoardImpl : GameBoard {
                 "RNBQKBNR"
             )
         )
+        _nextTurn = Player.WHITE
     }
 
     override fun move(move: Move) {
+        require(move.player == nextTurn)
         val captured = move.capturedPiece()
         if (captured != null) {
             capturedPieces.add(captured)
@@ -56,6 +62,7 @@ class GameBoardImpl : GameBoard {
         }
         move.move()
         _record.add(move)
+        _nextTurn = if (_nextTurn == Player.WHITE) Player.BLACK else Player.WHITE
     }
 
     override fun pieceAt(pos: Position?): Piece? {

@@ -2,8 +2,8 @@ package core.move
 
 import core.GameBoardImpl
 import core.Position
-import junit.framework.Assert.assertEquals
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class BishopMoveTest {
 

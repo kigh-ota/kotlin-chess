@@ -2,11 +2,14 @@ package core.move
 
 import core.GameBoard
 import core.Piece
+import core.Player
 import core.Position
 
 abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : Move {
     protected val piece: Piece = board.pieceAt(piecePosNotion)!!
     protected var dest: Position? = null
+    override val player: Player
+        get() = piece.player
 
     fun to(notion: String): SinglePieceMove {
         dest = Position.of(notion)

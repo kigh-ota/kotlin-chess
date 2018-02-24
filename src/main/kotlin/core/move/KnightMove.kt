@@ -10,8 +10,7 @@ class KnightMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMov
     }
 
     override fun possibleDestinations(): Set<Position> {
-        val ret = mutableSetOf<Position>()
-        arrayOf(
+        return arrayOf(
             piece.pos.to(-2, -1),
             piece.pos.to(-2, 1),
             piece.pos.to(2, -1),
@@ -20,10 +19,6 @@ class KnightMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMov
             piece.pos.to(-1, 2),
             piece.pos.to(1, -2),
             piece.pos.to(1, 2)
-        ).forEach {
-            if (it != null && !isOccupiedBySelfPiece(it)) ret.add(it)
-        }
-        return ret
+        ).filterNotNull().filter { !isOccupiedBySelfPiece(it) }.toSet()
     }
-
 }

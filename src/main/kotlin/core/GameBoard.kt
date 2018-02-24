@@ -5,6 +5,7 @@ import core.move.Move
 interface GameBoard {
     val pieces: Set<Piece>
     val record: List<Move>
+    val nextTurn: Player
     fun setup()
     fun set(strs: Array<String>)
     fun move(move: Move)

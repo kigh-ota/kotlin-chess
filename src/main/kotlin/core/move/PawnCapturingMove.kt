@@ -2,23 +2,18 @@ package core.move
 
 import core.GameBoard
 import core.Pawn
-import core.Piece
+import core.Player
 import core.Position
 
-class PawnCapturingMove(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
+class PawnCapturingMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, board) {
     override fun possibleDestinations(): Set<Position> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return when (piece.player) {
+            Player.WHITE -> arrayOf(piece.pos.to(1, -1), piece.pos.to(1, 1))
+            Player.BLACK -> arrayOf(piece.pos.to(-1, -1), piece.pos.to(-1, 1))
+        }.filterNotNull().filter { board.pieceAt(it)?.player != piece.player }.toSet()
     }
 
     init {
         require(piece is Pawn)
-    }
-
-    override fun isLegal(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun capturedPiece(): Piece? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
