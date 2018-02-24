@@ -1,21 +1,45 @@
 package core.move
 
-import core.Piece
-import core.Player
+import core.*
 
-class KingSideCastling : Move {
+class KingSideCastling(val board: GameBoard) : Move {
+    private val rook: Piece = board.pieceAt(if (player == Player.WHITE) "h1" else "h8")!!
+    private val king: Piece = board.pieces.first { it.player == player && it is King }
     override val player: Player
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        get() = board.nextTurn
 
     override fun isLegal(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (player) {
+            Player.WHITE -> {
+                if (arrayOf("f1", "g1").any {
+                        board.pieceAt(it) != null
+                    }) return false
+                return rook.moveCount == 0 && king.moveCount == 0
+            }
+            Player.BLACK -> {
+                if (arrayOf("f8", "g8").any {
+                        board.pieceAt(it) != null
+                    }) return false
+                return rook.moveCount == 0 && king.moveCount == 0
+            }
+        }
+        // TODO validate king is not and will not be checked
     }
 
     override fun capturedPiece(): Piece? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
     }
 
     override fun move() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (player) {
+            Player.WHITE -> {
+                rook.moveTo(Position.of("f1"))
+                king.moveTo(Position.of("g1"))
+            }
+            Player.BLACK -> {
+                rook.moveTo(Position.of("f8"))
+                king.moveTo(Position.of("g8"))
+            }
+        }
     }
 }
