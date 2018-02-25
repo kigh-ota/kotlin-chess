@@ -91,7 +91,7 @@ class GameBoardImpl : GameBoard {
 
     override fun isInCheck(player: Player): Boolean {
         return _pieces.find { it.player == player && it is King }!!
-            .isBeingAttackedBy(this)
+            .pos.isUnderAttackBy(player.opponent, this)
             .isNotEmpty()
     }
 }

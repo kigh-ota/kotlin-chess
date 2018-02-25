@@ -1,5 +1,8 @@
 package core
 
+import core.move.SinglePieceMove
+import core.piece.Piece
+
 data class Position(val rank: Int, val file: Int) {
     init {
         require(valid(rank, file))
@@ -17,6 +20,14 @@ data class Position(val rank: Int, val file: Int) {
 
     override fun toString(): String {
         return ('a' + file - 1).toString() + ('0' + rank)
+    }
+
+    fun isUnderAttackBy(enemySide: Player, board: GameBoard): Set<Piece> {
+        return board
+            .possibleMoves(enemySide)
+            .filter { it.capturing()?.pos == this }
+            .map { (it as SinglePieceMove).piece }
+            .toSet()
     }
 
     companion object {

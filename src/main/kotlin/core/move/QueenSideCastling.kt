@@ -18,19 +18,24 @@ class QueenSideCastling(override val player: Player, val board: GameBoard) : Mov
         }
         when (player) {
             Player.WHITE -> {
+                if (arrayOf("e1", "d1", "c1").any {
+                        Position.of(it).isUnderAttackBy(player.opponent, board).isNotEmpty()
+                    }) return false
                 if (arrayOf("b1", "c1", "d1").any {
                         board.pieceAt(it) != null
                     }) return false
                 return rook.moveCount == 0 && king.moveCount == 0
             }
             Player.BLACK -> {
+                if (arrayOf("e8", "d8", "c8").any {
+                        Position.of(it).isUnderAttackBy(player.opponent, board).isNotEmpty()
+                    }) return false
                 if (arrayOf("b8", "c8", "d8").any {
                         board.pieceAt(it) != null
                     }) return false
                 return rook.moveCount == 0 && king.moveCount == 0
             }
         }
-        // TODO validate king is not and will not be checked
     }
 
     override fun capturing(): Piece? {
