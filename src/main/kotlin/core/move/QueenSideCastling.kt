@@ -7,10 +7,13 @@ import core.piece.King
 import core.piece.Piece
 
 class QueenSideCastling(override val player: Player, val board: GameBoard) : Move {
-    private val rook: Piece = board.pieceAt(if (player == Player.WHITE) "a1" else "a8")!!
-    private val king: Piece = board.pieces.first { it.player == player && it is King }
+    private val rook: Piece? = board.pieceAt(if (player == Player.WHITE) "a1" else "a8")
+    private val king: Piece? = board.pieces.first { it.player == player && it is King }
 
     override fun isLegal(): Boolean {
+        if (rook == null || king == null) {
+            return false
+        }
         when (player) {
             Player.WHITE -> {
                 if (arrayOf("b1", "c1", "d1").any {
@@ -33,6 +36,8 @@ class QueenSideCastling(override val player: Player, val board: GameBoard) : Mov
     }
 
     override fun move() {
+        rook!!
+        king!!
         when (player) {
             Player.WHITE -> {
                 rook.moveTo(Position.of("d1"))

@@ -88,6 +88,12 @@ class GameBoardImpl : GameBoard {
             .flatten()
             .toSet()
     }
+
+    override fun isInCheck(player: Player): Boolean {
+        return _pieces.find { it.player == player && it is King }!!
+            .isBeingAttackedBy(this)
+            .isNotEmpty()
+    }
 }
 
 private fun charToPiece(c: Char, pos: Position): Piece? {

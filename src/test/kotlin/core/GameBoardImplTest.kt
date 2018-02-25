@@ -5,6 +5,7 @@ import core.move.PawnSingleMove
 import core.piece.King
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -46,5 +47,24 @@ class GameBoardImplTest {
         sut.move(PawnSingleMove("e7", sut).to("e6"))
         val actual = sut.possibleMoves(Player.WHITE)
         assert(actual.size == 30)
+    }
+
+    @Test
+    fun isInCheck() {
+        val board = GameBoardImpl()
+        board.set(
+            arrayOf(
+                "....k...",
+                "........",
+                "........",
+                "....R...",
+                "........",
+                "........",
+                "........",
+                "....K..."
+            )
+        )
+        assertFalse(board.isInCheck(Player.WHITE))
+        assertTrue(board.isInCheck(Player.BLACK))
     }
 }
