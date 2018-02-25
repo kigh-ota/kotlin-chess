@@ -1,12 +1,12 @@
 package core.move
 
 import core.GameBoard
-import core.piece.Piece
 import core.Position
+import core.piece.Piece
 
 abstract class CapturableSingleMove(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
     override fun capturing(): Piece? {
-        val pieceAtDest = board.pieceAt(dest)
+        val pieceAtDest = board.pieceAt(_dest)
         return if (pieceAtDest?.player != piece.player)
             pieceAtDest
         else

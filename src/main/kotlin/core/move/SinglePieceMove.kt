@@ -7,22 +7,25 @@ import core.piece.Piece
 
 abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : Move {
     val piece: Piece = board.pieceAt(piecePosNotion)!!
-    protected var dest: Position? = null
+    override val from: Position? = Position.of(piecePosNotion)
+    protected var _dest: Position? = null
+    override val dest: Position?
+        get() = _dest
     override val player: Player
         get() = piece.player
 
     fun to(notion: String): SinglePieceMove {
-        dest = Position.of(notion)
+        _dest = Position.of(notion)
         return this
     }
 
     override fun move() {
         if (!isLegal()) throw RuntimeException("Illegal Move")
-        piece.moveTo(dest)
+        piece.moveTo(_dest)
     }
 
     override fun isLegal(): Boolean {
-        return possibleDestinations().contains(dest)
+        return possibleDestinations().contains(_dest)
     }
 
     abstract fun possibleDestinations(): Set<Position>
@@ -32,6 +35,6 @@ abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : M
     }
 
     override fun toString(): String {
-        return "${piece.javaClass.simpleName} ${piece.pos} -> $dest"
+        return "${piece.javaClass.simpleName} $from -> $dest"
     }
 }

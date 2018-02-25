@@ -1,6 +1,7 @@
 package core.move
 
 import core.Player
+import core.Position
 import core.piece.Piece
 
 /**
@@ -9,6 +10,8 @@ import core.piece.Piece
  */
 interface Move {
     val player: Player
+    val from: Position?
+    val dest: Position?
     fun isLegal(): Boolean
     fun capturing(): Piece?
     fun move()

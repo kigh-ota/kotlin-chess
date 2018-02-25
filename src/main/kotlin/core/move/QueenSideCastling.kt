@@ -7,6 +7,8 @@ import core.piece.King
 import core.piece.Piece
 
 class QueenSideCastling(override val player: Player, val board: GameBoard) : Move {
+    override val from: Position? = null
+    override val dest: Position? = null
     private val rook: Piece? = board.pieceAt(if (player == Player.WHITE) "a1" else "a8")
     private val king: Piece? = board.pieces.first { it.player == player && it is King }
 

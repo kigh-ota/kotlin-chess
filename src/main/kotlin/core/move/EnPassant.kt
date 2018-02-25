@@ -1,13 +1,37 @@
 package core.move
 
 import core.GameBoard
+import core.Player
 import core.Position
 import core.piece.Pawn
 import core.piece.Piece
 
-class EnPassant(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
+class EnPassant(piecePosNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, board) {
     override fun possibleDestinations(): Set<Position> {
-        return setOf() // TODO
+        val lastMove = board.record.lastOrNull()
+        if (lastMove == null || lastMove !is PawnDoubleMove) {
+            return setOf()
+        }
+
+        return when (piece.player) {
+            Player.WHITE -> setOf(
+                Position.maybe(5, lastMove.dest!!.file - 1),
+                Position.maybe(5, lastMove.dest!!.file + 1)
+            )
+            Player.BLACK -> setOf(
+                Position.maybe(4, lastMove.dest!!.file - 1),
+                Position.maybe(4, lastMove.dest!!.file + 1)
+            )
+        }
+            .filterNotNull()
+            .filter { piece.pos == it }
+            .mapNotNull {
+                Position(
+                    it.rank + (if (piece.player == Player.WHITE) 1 else -1),
+                    lastMove.dest!!.file
+                )
+            }
+            .toSet()
     }
 
     init {
@@ -15,11 +39,6 @@ class EnPassant(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piec
     }
 
     override fun capturing(): Piece? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return board.pieceAt(_dest?.to(if (piece.player == Player.WHITE) -1 else 1, 0))
     }
-
-    override fun isLegal(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }
