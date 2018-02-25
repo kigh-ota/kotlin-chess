@@ -1,7 +1,7 @@
 package core.move
 
 import core.GameBoard
-import core.Piece
+import core.piece.Piece
 import core.Position
 
 abstract class CapturableSingleMove(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {

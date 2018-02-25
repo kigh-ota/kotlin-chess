@@ -2,7 +2,7 @@ package core.move
 
 import core.GameBoard
 import core.Position
-import core.Rook
+import core.piece.Rook
 
 class RookMove(piecePosNotion: String, board: GameBoard) :
     CapturableSingleMove(piecePosNotion, board) {

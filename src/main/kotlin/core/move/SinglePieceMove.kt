@@ -1,7 +1,7 @@
 package core.move
 
 import core.GameBoard
-import core.Piece
+import core.piece.Piece
 import core.Player
 import core.Position
 

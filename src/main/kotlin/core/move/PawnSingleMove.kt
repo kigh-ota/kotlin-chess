@@ -1,6 +1,8 @@
 package core.move
 
 import core.*
+import core.piece.Pawn
+import core.piece.Piece
 
 class PawnSingleMove(piecePosNotion: String, board: GameBoard) :
     SinglePieceMove(piecePosNotion, board) {

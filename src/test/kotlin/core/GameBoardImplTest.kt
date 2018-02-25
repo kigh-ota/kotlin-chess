@@ -1,5 +1,6 @@
 package core
 
+import core.piece.King
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

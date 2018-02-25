@@ -1,8 +1,8 @@
 package core.move
 
 import core.GameBoard
-import core.Pawn
-import core.Piece
+import core.piece.Pawn
+import core.piece.Piece
 import core.Position
 
 class EnPassant(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {

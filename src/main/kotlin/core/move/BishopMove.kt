@@ -1,6 +1,6 @@
 package core.move
 
-import core.Bishop
+import core.piece.Bishop
 import core.GameBoard
 import core.Position
 

@@ -1,6 +1,8 @@
 package core
 
 import core.move.PawnSingleMove
+import core.piece.Bishop
+import core.piece.Pawn
 import org.junit.Test
 import kotlin.test.assertEquals
 

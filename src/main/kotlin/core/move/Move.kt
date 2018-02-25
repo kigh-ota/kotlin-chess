@@ -1,6 +1,6 @@
 package core.move
 
-import core.Piece
+import core.piece.Piece
 import core.Player
 
 interface Move {

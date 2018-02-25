@@ -2,7 +2,7 @@ package core.move
 
 import core.GameBoard
 import core.Position
-import core.Queen
+import core.piece.Queen
 
 class QueenMove(piecePosNotion: String, board: GameBoard) : CapturableSingleMove(piecePosNotion, board) {
     init {

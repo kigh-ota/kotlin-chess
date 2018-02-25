@@ -1,6 +1,7 @@
 package core
 
 import core.move.Move
+import core.piece.Piece
 
 interface GameBoard {
     val pieces: Set<Piece>
@@ -12,6 +13,7 @@ interface GameBoard {
     fun put(piece: Piece)
     fun pieceAt(pos: Position?): Piece?
     fun pieceAt(notion: String): Piece?
+    fun possibleMoves(piece: Piece): Set<Move>
 
     companion object {
         const val SIZE = 8

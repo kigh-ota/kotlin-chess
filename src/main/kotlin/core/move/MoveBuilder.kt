@@ -1,6 +1,7 @@
 package core.move
 
 import core.*
+import core.piece.*
 
 class MoveBuilder(val src: String, val dest: String, val board: GameBoard) {
     fun build(): SinglePieceMove {

@@ -15,6 +15,10 @@ data class Position(val rank: Int, val file: Int) {
     fun toLowerLeft(i: Int): Position? = to(-i, -i)
     fun toLowerRight(i: Int): Position? = to(-i, i)
 
+    override fun toString(): String {
+        return ('a' + file - 1).toString() + ('0' + rank)
+    }
+
     companion object {
         fun of(notion: String): Position {
             require(notion.length == 2)

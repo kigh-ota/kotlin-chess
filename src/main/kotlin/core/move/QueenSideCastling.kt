@@ -1,6 +1,8 @@
 package core.move
 
 import core.*
+import core.piece.King
+import core.piece.Piece
 
 class QueenSideCastling(val board: GameBoard) : Move {
     private val rook: Piece = board.pieceAt(if (player == Player.WHITE) "a1" else "a8")!!
