@@ -28,7 +28,7 @@ class KingSideCastling(override val player: Player, val board: GameBoard) : Move
         // TODO validate king is not and will not be checked
     }
 
-    override fun capturedPiece(): Piece? {
+    override fun capturing(): Piece? {
         return null
     }
 

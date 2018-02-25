@@ -14,7 +14,7 @@ class EnPassant(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piec
         require(piece is Pawn)
     }
 
-    override fun capturedPiece(): Piece? {
+    override fun capturing(): Piece? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

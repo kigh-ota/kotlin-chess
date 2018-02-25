@@ -10,6 +10,6 @@ import core.piece.Piece
 interface Move {
     val player: Player
     fun isLegal(): Boolean
-    fun capturedPiece(): Piece?
+    fun capturing(): Piece?
     fun move()
 }

@@ -56,14 +56,15 @@ class GameBoardImpl : GameBoard {
 
     override fun move(move: Move) {
         require(move.player == nextTurn)
-        val captured = move.capturedPiece()
+        val captured = move.capturing()
+        move.move()
         if (captured != null) {
             capturedPieces.add(captured)
             _pieces.remove(captured)
         }
-        move.move()
+
         _record.add(move)
-        _nextTurn = if (_nextTurn == Player.WHITE) Player.BLACK else Player.WHITE
+        _nextTurn = _nextTurn.opponent
     }
 
     override fun pieceAt(pos: Position?): Piece? {

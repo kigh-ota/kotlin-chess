@@ -6,7 +6,7 @@ import core.Position
 import core.piece.Piece
 
 abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : Move {
-    protected val piece: Piece = board.pieceAt(piecePosNotion)!!
+    val piece: Piece = board.pieceAt(piecePosNotion)!!
     protected var dest: Position? = null
     override val player: Player
         get() = piece.player
@@ -27,7 +27,7 @@ abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : M
 
     abstract fun possibleDestinations(): Set<Position>
 
-    override fun capturedPiece(): Piece? {
+    override fun capturing(): Piece? {
         return null
     }
 

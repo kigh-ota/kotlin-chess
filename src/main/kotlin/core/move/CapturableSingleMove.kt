@@ -5,7 +5,7 @@ import core.piece.Piece
 import core.Position
 
 abstract class CapturableSingleMove(piecePosNotion: String, board: GameBoard) : SinglePieceMove(piecePosNotion, board) {
-    override fun capturedPiece(): Piece? {
+    override fun capturing(): Piece? {
         val pieceAtDest = board.pieceAt(dest)
         return if (pieceAtDest?.player != piece.player)
             pieceAtDest

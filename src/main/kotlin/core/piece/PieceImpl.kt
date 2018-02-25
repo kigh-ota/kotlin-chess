@@ -3,18 +3,12 @@ package core.piece
 import core.GameBoard
 import core.Player
 import core.Position
-import core.move.Move
+import core.move.SinglePieceMove
 
 abstract class PieceImpl(override var pos: Position, override val player: Player): Piece {
     private var _moveCount = 0
     override val moveCount: Int
         get() = _moveCount
-
-    override val rank: Int
-        get() = pos.rank
-
-    override val file: Int
-        get() = pos.file
 
     override fun moveTo(dest: Position?) {
         if (dest == null) throw RuntimeException("Illegal Destination")
@@ -22,7 +16,15 @@ abstract class PieceImpl(override var pos: Position, override val player: Player
         _moveCount++
     }
 
-    override fun possibleMoves(board: GameBoard): Set<Move> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun isBeingAttackedBy(board: GameBoard): Set<Piece> {
+        return board
+            .possibleMoves(this.player.opponent)
+            .filter { it.capturing()?.pos == this.pos }
+            .map { (it as SinglePieceMove).piece }
+            .toSet()
+    }
+
+    override fun toString(): String {
+        return "${this.javaClass.simpleName} ${this.pos}"
     }
 }

@@ -11,7 +11,7 @@ class PawnSingleMove(piecePosNotion: String, board: GameBoard) :
         require(piece is Pawn)
     }
 
-    override fun capturedPiece(): Piece? {
+    override fun capturing(): Piece? {
         return null;
     }
 
