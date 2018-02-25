@@ -1,5 +1,6 @@
 
 import core.GameBoardImpl
+import core.Player
 import core.move.*
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -43,14 +44,14 @@ class KasparovVsTopalov1999Test {
         board.move(PawnSingleMove("a2", board).to("a3"))
         board.move(PawnDoubleMove("e7", board).to("e5"))
 
-        board.move(QueenSideCastling(board))
+        board.move(QueenSideCastling(Player.WHITE, board))
         board.move(QueenMove("d8", board).to("e7"))
 
         board.move(KingMove("c1", board).to("b1"))
         board.move(PawnSingleMove("a7", board).to("a6"))
 
         board.move(KnightMove("e2", board).to("c1"))
-        board.move(QueenSideCastling(board))
+        board.move(QueenSideCastling(Player.BLACK, board))
 
         board.move(KnightMove("c1", board).to("b3"))
         board.move(PawnCapturingMove("e5", board).to("d4"))

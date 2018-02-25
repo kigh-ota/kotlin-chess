@@ -1,34 +1,9 @@
 package core
 
-import core.move.*
+import core.move.Move
 import core.piece.*
 
 class GameBoardImpl : GameBoard {
-    override fun possibleMoves(piece: Piece): Set<Move> {
-        return when (piece) {
-            is King ->  // kintmove, king-side castling
-                KingMove(
-                    piece.pos.toString(),
-                    this
-                ).possibleDestinations().map { KingMove(piece.pos.toString(), this).to(it.toString()) }.toSet()
-            is Queen -> QueenMove(
-                piece.pos.toString(),
-                this
-            ).possibleDestinations().map { QueenMove(piece.pos.toString(), this).to(it.toString()) }.toSet()
-            is Rook -> setOf()  // rookmove, kingside castling  TODO
-            is Bishop -> BishopMove(
-                piece.pos.toString(),
-                this
-            ).possibleDestinations().map { BishopMove(piece.pos.toString(), this).to(it.toString()) }.toSet()
-            is Knight -> KnightMove(
-                piece.pos.toString(),
-                this
-            ).possibleDestinations().map { KnightMove(piece.pos.toString(), this).to(it.toString()) }.toSet()
-            is Pawn -> setOf()  // single, double, enpassant  TODO
-            else -> throw RuntimeException("Illegal Piece Type")
-        }
-    }
-
     private var _pieces: MutableSet<Piece> = mutableSetOf()
     override val pieces: Set<Piece>
         get() = _pieces
