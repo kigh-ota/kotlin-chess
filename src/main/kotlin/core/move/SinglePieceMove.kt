@@ -1,9 +1,9 @@
 package core.move
 
 import core.GameBoard
-import core.piece.Piece
 import core.Player
 import core.Position
+import core.piece.Piece
 
 abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : Move {
     protected val piece: Piece = board.pieceAt(piecePosNotion)!!
@@ -29,5 +29,9 @@ abstract class SinglePieceMove(piecePosNotion: String, val board: GameBoard) : M
 
     override fun capturedPiece(): Piece? {
         return null
+    }
+
+    override fun toString(): String {
+        return "${piece.javaClass.simpleName} ${piece.pos} -> $dest"
     }
 }

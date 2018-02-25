@@ -13,6 +13,7 @@ interface GameBoard {
     fun put(piece: Piece)
     fun pieceAt(pos: Position?): Piece?
     fun pieceAt(notion: String): Piece?
+    fun possibleMoves(player: Player): Set<Move>
 
     companion object {
         const val SIZE = 8

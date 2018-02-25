@@ -79,6 +79,14 @@ class GameBoardImpl : GameBoard {
         require(_pieces.all { it.pos != piece.pos })
         _pieces.add(piece)
     }
+
+    override fun possibleMoves(player: Player): Set<Move> {
+        return _pieces
+            .filter { it.player == player }
+            .map { it.possibleMoves(this) }
+            .flatten()
+            .toSet()
+    }
 }
 
 private fun charToPiece(c: Char, pos: Position): Piece? {
